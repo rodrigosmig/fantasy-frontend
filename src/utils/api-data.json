@@ -1,0 +1,49 @@
+{
+  "login": { 
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiUm9kcmlnbyBNaWd1ZWwiLCJlbWFpbCI6InJvZHJpZ29zbWlnQGdtYWlsLmNvbSIsInRlYW0iOnsiaWQiOjEsIm5hbWUiOiJCcmlzYUZDIiwic2NvcmUiOjEyMiwiZm9ybWF0aW9uIjp7ImlkIjoxLCJmb3JtYXRpb24iOiI0LTQtMiJ9LCJwbGF5ZXJzIjpbXX19LCJleHBpcmVJbiI6MTUxNjIzOTAyMn0.OYMN1vWg_VMmHZxiCP3y_qeMAmBTnRFx5ZzoKMJkBUg"
+  },
+  "users": [
+    { 
+      "id": 1, 
+      "nome": "Rodrigo Miguel", 
+      "email": "rodrigosmig@gmail.com",
+      "team": {
+        "id": 1,
+        "name": "BrisaFC",
+        "score": 122,
+        "formation": {
+          "id": 1,
+          "formation": "4-4-2"
+        },
+        "players": []
+      }
+    },
+    { 
+      "id": 2, 
+      "nome": "Isabela Prado", 
+      "email": "isabela@gmail.com",
+      "team": {
+        "id": 1,
+        "name": "DeusEhMaisFC",
+        "score": 166,
+        "formation": {
+          "id": 2,
+          "formation": "4-3-3"
+        },
+        "players": []
+      }
+    }
+  ],
+  "positions": [],
+  "players": [],
+  "countries": [
+    {"id": 1, "name": "Brasil"},
+    {"id": 2, "name": "Inglaterra"},
+    {"id": 3, "name": "Egito"},
+    {"id": 4, "name": "Senegal"},
+    {"id": 5, "name": "Portugal"},
+    {"id": 6, "name": "Bélgica"},
+    {"id": 7, "name": "Holanda"},
+    {"id": 8, "name": "França"}
+  ]
+}
