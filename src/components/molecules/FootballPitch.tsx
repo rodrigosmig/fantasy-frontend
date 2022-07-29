@@ -1,6 +1,7 @@
-import { ReactNode } from "react";
+import { memo } from "react";
 import styled from "styled-components";
 import Field from "../../assets/images/football_pitch.png";
+import { Formation } from "../organisms/Formation";
  
 const Container = styled.div`
   width: 100%;
@@ -19,18 +20,14 @@ const Content = styled.div`
   height: 80%;
   margin-bottom: 20px;
 `
-
-interface Props {
-  children: ReactNode;
-}
-
-export const FootballPitch = ({children}: Props) => {
+const FootballPitchComponent = () => {
   return (
     <Container>
       <Content>
-        { children }
+        <Formation />
       </Content>
     </Container>
-
   )
 }
+
+export const FootballPitch = memo(FootballPitchComponent);

@@ -1,10 +1,13 @@
 import NextLink from "next/link";
 import { useRouter } from "next/router";
+import { memo } from "react";
 import styled from "styled-components";
+import { useSession } from "../../contexts/AuthContext";
 import { Link } from "./Link";
 
-export function Header() {
+const HeaderComponent = () => {
   const { asPath } = useRouter();
+  const { signOut } = useSession();
 
   const isActive = (link: string) => {
     return asPath === link
@@ -30,6 +33,12 @@ export function Header() {
             RANKING
           </NavItems>
         </Link>
+
+
+          <NavItems className="header_logout" isActive={false} onClick={signOut}>
+            Sair
+          </NavItems>
+
 
       </NavMenu>
     </Container>
@@ -62,7 +71,13 @@ const NavItems = styled.div<NavItemsProps>`
   background-color: ${(props) => props.isActive ? 'var(--gray-50)' : 'var(--green)'};
   color: ${(props) => props.isActive ? 'var(--pink)' : 'var(--white)'};
 
+  &.header_logout {
+    cursor: pointer;
+  }
+
   &:hover {
     filter: ${(props) => props.isActive ? 'brightness(100%)' : 'brightness(80%)'};
   }
 `;
+
+export const Header = memo(HeaderComponent)

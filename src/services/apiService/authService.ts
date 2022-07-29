@@ -1,14 +1,18 @@
+import { IUser } from './../../types/auth';
 import { AxiosResponse } from "axios";
-import { ILogin, ILoginResponse, IMeResponse, IUser } from "../../types/auth";
+import { ILogin, ILoginResponse, IMeResponse, IRegister } from "../../types/auth";
 import { setupApiClient } from "../api";
 
-const apiClient = setupApiClient();
+const apiClient = setupApiClient(undefined);
 
 export const authService = {
-  signIn: (credentials: ILogin): Promise<AxiosResponse<ILoginResponse>> => apiClient.post(
-      "/sessions",
-      credentials,
-      {timeout: 5000}
+  register: (data: IRegister): Promise<AxiosResponse<IUser>> => apiClient.post(
+    "/auth/register",
+    data,
     ),
-  me: (): Promise<AxiosResponse<IMeResponse>> => apiClient.get("/me"), 
+  signIn: (credentials: ILogin): Promise<AxiosResponse<ILoginResponse>> => apiClient.post(
+    "/auth/login",
+    credentials   
+  ),
+  me: (): Promise<AxiosResponse<IMeResponse>> => apiClient.get("/auth/me"), 
 };

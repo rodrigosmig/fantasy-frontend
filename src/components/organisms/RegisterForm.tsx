@@ -1,20 +1,40 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import { IRegister } from "../../types/auth";
+import { IRegister, RegisterErrorFields } from "../../types/auth";
 import { InputField } from "../molecules/InputField";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { registerValidation } from "../../validations/auth";
 import { Link } from "../molecules/Link";
 import { Button } from "../atoms/Button";
+import { authService } from "../../services/apiService/authService";
+import { AxiosError } from "axios";
+import { notify } from "../../utils/helpers";
 
 export const RegisterForm = () => {
-  const { register, handleSubmit, formState } = useForm<IRegister>({
+  const { register, handleSubmit, reset, setError, formState } = useForm<IRegister>({
     resolver: yupResolver(registerValidation)
   });
   const { errors } = formState;
 
-  const onSubmit = handleSubmit(values => {
-    console.log(values)
+  const onSubmit = handleSubmit(async values => {
+    try {
+      const response = await authService.register(values)
+
+      notify(`Usuário ${response.data.name} cadastrado com sucesso!`, "success")
+
+      reset();
+
+    } catch (ex) {
+      const err = ex as AxiosError
+
+      if (err.response?.status === 422) {
+        const data = err.response.data as RegisterErrorFields;
+     
+        for (const error of data) {
+          setError(error.field, {message: error.error})
+        }        
+      }
+    }
   })
 
   return (
@@ -43,10 +63,10 @@ export const RegisterForm = () => {
         <Item>
           <InputField 
             label="Nome do Time"
-            inputName="team_name"
+            inputName="teamName"
             type="text"
-            error={errors.team_name}
-            {...register('team_name')}
+            error={errors.teamName}
+            {...register('teamName')}
           />
         </Item>
 
@@ -63,10 +83,10 @@ export const RegisterForm = () => {
         <Item>
           <InputField
             label="Confirmação de Senha"
-            inputName="password_confirmation"
+            inputName="passwordConfirmation"
             type="password"
-            error={errors.password_confirmation}
-            {...register('password_confirmation')}
+            error={errors.passwordConfirmation}
+            {...register('passwordConfirmation')}
           />
         </Item>
 

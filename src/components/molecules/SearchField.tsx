@@ -2,8 +2,9 @@ import styled from "styled-components"
 import { Button } from "../atoms/Button";
 import { Input } from "../atoms/Input";
 import { FiSearch } from "react-icons/fi";
+import { InputHTMLAttributes, memo } from "react";
 
-export const Search = ({...rest}) => {
+export const SearchComponent = ({...rest}: InputHTMLAttributes<HTMLInputElement>) => {
   return (
     <Container>
       <InputCompnent 
@@ -41,7 +42,6 @@ const ButtonComponent = styled(Button)`
   border-bottom-right-radius: 0px;
 `;
 
-const SearchIcon = styled(FiSearch)`
+const SearchIcon = styled(FiSearch)``
 
-`
-
+export const Search = memo(SearchComponent)

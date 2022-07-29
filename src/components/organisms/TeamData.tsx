@@ -1,28 +1,47 @@
+import { useState } from "react";
 import styled from "styled-components";
-import { useSession } from "../../contexts/AuthContext";
+import { useFormation } from "../../contexts/FormationContext";
+import { useTeam } from "../../contexts/TeamContext";
+import { Loading } from "../atoms/Loading";
+import { Select } from "../atoms/Select";
 
 export const TeamData = () => {
-  const { user } = useSession();
-  return (
-    <Container>
-      <Header>
-        <UserName>{ user?.name }</UserName>
-      </Header>
+  const { team } = useTeam();
+  const { formations } = useFormation();
+  const [changeFormation, setChangeFormation] = useState(false);
+  const [newFormationSelected, setNewFormationSelected] = useState("");
+ 
+  return (   
       <Content>
         <Item>
           <ItemLabel>Time:</ItemLabel>
-          <Item className="item_team">{ user?.team?.name }</Item>
+          <Item className="item_team">{ team?.name }</Item>
         </Item>
 
         <Item>
           <ItemLabel>Formação:</ItemLabel>
-          <Points>4-4-2</Points>
-          <Button>Alterar</Button>
+            { changeFormation 
+              ? (
+                <>
+                  <FormationSelect
+                    options={formations}
+                    value={newFormationSelected}
+                    onChange={(e) => setNewFormationSelected(e.target.value)}
+                  />
+                  <Button onClick={() => setChangeFormation(false)}>Confirmar</Button>
+                </>
+              ) : (
+                <>
+                  <Points>{ team?.formation?.formation }</Points>
+                  <Button onClick={() => setChangeFormation(true)}>Alterar</Button>
+                </>
+              )
+            }
         </Item>
 
         <Item>
           <ItemLabel>Total de Pontos:</ItemLabel>
-          <Points>1366</Points>
+          <Points>{ team?.score }</Points>
         </Item>
 
         <Item>
@@ -35,19 +54,8 @@ export const TeamData = () => {
           <Points>36</Points>
         </Item>
       </Content>
-    
-    </Container>
   )
 }
-
-const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 2.5rem;
-`;
 
 const Content = styled.div`
   width: 90%;
@@ -55,28 +63,16 @@ const Content = styled.div`
   font-size: larger;
 `;
 
-const Header = styled.header`
-  width: 90%;
-  border-bottom: 1px solid var(--gray-500);
-  text-align: center;
-`;
-
-const UserName = styled.p`
-  font-size: x-large;
-  font-weight: bold;
-  padding: 20px;
-  background-color: var(--gray-700);
-`;
-
 const Item = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 4.5rem;
+  height: 3.5rem;
   border-bottom: 1px solid var(--gray-500);
 
   &.item_team {
     font-weight: bold;
+    border-bottom: 0px;
   }
 `;
 
@@ -98,5 +94,14 @@ const Button = styled.button`
 
   &:hover {
     filter: brightness(85%)
+  }
+`;
+
+const FormationSelect = styled(Select)`
+  margin-top: 0px;
+
+  & option {
+    font-size: medium;
+    font-weight: bold;
   }
 `;

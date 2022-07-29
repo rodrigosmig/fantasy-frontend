@@ -17,13 +17,20 @@ export interface ILogin extends IAuthForm {}
 
 export interface ILoginResponse {
   token: string;
-  refreshToken: string,
-  user: IUser
 }
+
+export interface ILoginError {
+  message: string;
+}
+
+export type LoginErrorFields = {
+  error: string;
+  field: "email" | "password";
+}[]
 
 export interface IAuthContextData {
   signIn: (credentials: ILogin) => Promise<void>;
-  //signOut: () => void;
+  signOut: () => void;
   setUser: (user: IUser) => void,
   user: IUser;
   isAuthenticated: boolean;
@@ -31,12 +38,17 @@ export interface IAuthContextData {
 
 export interface IRegister extends IAuthForm {
   name: string;
-  team_name: string;
-  password_confirmation: string;
+  teamName: string;
+  passwordConfirmation: string;
 }
 
-export interface IMeResponse {
-  user: IUser
+export type RegisterErrorFields = {
+  error: string;
+  field: "name" | "email" | "password" | "passwordConfirmation" | "teamName";
+}[]
+
+export interface IMeResponse extends IUser {
+  team: ITeam
 }
 
 export type ITokenContext = GetServerSidePropsContext | null | undefined;

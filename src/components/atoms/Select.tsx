@@ -12,7 +12,7 @@ const SelectBase: ForwardRefRenderFunction<HTMLSelectElement, Props> = ({
       ref={ref}
       {...rest}
     >
-      {/* <Option value="" disabled selected>{placeHolder}</Option> */}
+      <Option value="" disabled>Selecione</Option>
       {options.map(option => (
         <Option key={option.value} value={option.value}>{option.label}</Option>
       ))}

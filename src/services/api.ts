@@ -6,9 +6,6 @@ import { tokenService } from './tokenService';
 import { signOut } from '../contexts/AuthContext';
 import { AuthTokenError } from './errors/AuthTokenError';
 
-let isRefreshing = false;
-let failedRequestsQueue: any[] = [];
-
 type ContextType = GetServerSidePropsContext | null | undefined
 
 export const setupApiClient = (context: ContextType) => {
@@ -25,7 +22,7 @@ export const setupApiClient = (context: ContextType) => {
     
     return config;
   });
-
+/* 
   api.interceptors.response.use(response => {
     return response;
   }, (error: AxiosError<ITokenExpiredError>) => {
@@ -79,7 +76,7 @@ export const setupApiClient = (context: ContextType) => {
         }
       }
     }
-  });
+  }); */
 
   return api;
 }

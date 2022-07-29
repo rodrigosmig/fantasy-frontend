@@ -19,7 +19,7 @@ export function withSSRAuth<P>(fn: GetServerSideProps<P>): GetServerSideProps {
       return await fn(context);      
     } catch (error) {
       const err = error as AxiosError
-      console.log("status", err.response?.status)
+
       if (err.response?.status === 404) {
         return {
           notFound: true,

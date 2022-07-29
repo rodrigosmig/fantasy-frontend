@@ -1,4 +1,4 @@
-import { forwardRef, ForwardRefRenderFunction } from "react";
+import { forwardRef, ForwardRefRenderFunction, memo, SelectHTMLAttributes } from "react";
 import { FieldError } from "react-hook-form";
 import styled from "styled-components";
 import { Select } from "../atoms/Select";
@@ -6,7 +6,6 @@ import { Select } from "../atoms/Select";
 const SelectBase: ForwardRefRenderFunction<HTMLSelectElement, Props> = ({ 
   name,
   label,
-  //placeHolder = "Selecione uma opção",
   error,
   options,
   ...rest 
@@ -29,10 +28,9 @@ const SelectBase: ForwardRefRenderFunction<HTMLSelectElement, Props> = ({
   )
 }
 
-interface Props {
+interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   name: string;
   label?: string;
-  placeHolder?: string;
   error?: FieldError;
   options: {
     value: string | number;
@@ -56,4 +54,4 @@ const Error = styled.p`
   font-style: italic;
 `;
 
-export const SelectField = forwardRef(SelectBase);
+export const SelectField = memo(forwardRef(SelectBase))

@@ -24,7 +24,7 @@ const spin = keyframes`
 
 export const LoadingComponent = styled.div`
   border: 0.2em solid rgba(0, 0, 0, 0.2);
-  border-top: 0.2em solid var(--gray-700);
+  border-top: 0.2em solid var(--gray-100);
   border-radius: 50%;
   width: 16px;
   height: 16px;

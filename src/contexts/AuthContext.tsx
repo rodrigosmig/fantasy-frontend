@@ -1,9 +1,9 @@
-import { destroyCookie, parseCookies, setCookie } from "nookies";
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from "react";
 import Router, { useRouter } from 'next/router';
 import { IAuthContextData, ILogin, IUser } from "../types/auth";
 import { authService } from "../services/apiService/authService";
 import { tokenService } from "../services/tokenService";
+import { useTeam } from "./TeamContext";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -15,7 +15,7 @@ let authChannel: BroadcastChannel;
 
 export const signOut = () => {
   authChannel.postMessage("signOut");
-  //logout();
+  logout();
 }
 
 const logout = async () => {
@@ -34,6 +34,7 @@ const logout = async () => {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const router = useRouter()
   const [user, setUser] = useState<IUser>({} as IUser);
+
   const isAuthenticated = !!user;
 
   useEffect(() => {
@@ -56,8 +57,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
     if (token) {
       authService.me().then(response => {
-        const { user: updatedUser } = response.data;
-        setUser(updatedUser)
+        const user = {
+          id: response.data.id,
+          name: response.data.name,
+          email: response.data.email
+        };
+
+        setUser(user)
       })
       .catch(() => {
         signOut()
@@ -65,25 +71,32 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   }, []);
 
-  const signIn = async ({ email, password }: ILogin) => {
-    const response = await authService.signIn({
+  const signIn = useCallback(async ({ email, password }: ILogin) => {
+    
+    const SignInResponse = await authService.signIn({
       email,
       password,
-    })
+    });
 
-    const { token, refreshToken, user } = response.data;
+    const { token } = SignInResponse.data;
+    tokenService.save(token, null);
 
-    tokenService.save(token, refreshToken, null);
+    const meResponse = await authService.me();
+    const user = {
+      id: meResponse.data.id,
+      name: meResponse.data.name,
+      email: meResponse.data.email
+    };
 
     setUser(user);
     
     router.push('/home');
-  }
+  }, [])
 
   return (
     <AuthContext.Provider value={{ 
       signIn, 
-      //signOut,
+      signOut,
       setUser,
       user,
       isAuthenticated }}>
@@ -97,7 +110,7 @@ export const useSession = () => {
     isAuthenticated,
     user,
     signIn,
-    //signOut,
+    signOut,
     setUser 
   } = useContext(AuthContext);
   
@@ -105,7 +118,7 @@ export const useSession = () => {
     isAuthenticated,
     user,
     signIn,
-    //signOut,
+    signOut,
     setUser 
   }
 }
