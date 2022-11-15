@@ -1,15 +1,15 @@
-import { ICountry } from "./pais";
+import { IPais } from "./pais";
 import { IPosition } from "./posicao";
 
-export interface IPlayer {
+export interface IJogador {
   id: number;
   nome: string;
   posicao: IPosition;
   pontos: string;
-  pais: ICountry
+  pais: IPais
 }
 
-export interface IQuantityPositions {
+export interface IQuantidadePosicoes {
   defesa: number;
   meio: number;
   ataque: number;
@@ -17,9 +17,9 @@ export interface IQuantityPositions {
 }
 
 export interface IJogadoresPosicoesContextData {
-  defesa: IPlayer[];
-  meio: IPlayer[];
-  ataque: IPlayer[];
-  goleiro: IPlayer[];
-  quantidadePosicoes: IQuantityPositions;
+  defesa: IJogador[];
+  meio: IJogador[];
+  ataque: IJogador[];
+  goleiro: IJogador[];
+  quantidadePosicoes: IQuantidadePosicoes;
 }

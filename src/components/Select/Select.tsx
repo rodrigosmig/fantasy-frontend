@@ -17,7 +17,9 @@ const SelectBase: ForwardRefRenderFunction<HTMLSelectElement, Props> = ({ inputN
       <ChakraSelect
         id={inputName}
         name={inputName}
-        focusBorderColor="pink.500"
+        _focus= {{ 
+          borderColor: "pink.500"
+        }}
         ref={ref}
         {...rest}
       >

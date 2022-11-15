@@ -5,9 +5,7 @@ import {
 } from "@chakra-ui/react";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AxiosError } from "axios";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useQueryClient } from "react-query";
 import { useFormacoes } from "../../hooks/useFormacoes";
 import { useTime } from "../../hooks/useTime";
 import { teamService } from "../../services/apiService/teamService";

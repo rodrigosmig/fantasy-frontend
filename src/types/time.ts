@@ -1,5 +1,5 @@
 import { IFormacao } from "./formacao";
-import { IPlayer } from "./jogador";
+import { IJogador } from "./jogador";
 
 
 export interface ITime {
@@ -7,7 +7,7 @@ export interface ITime {
   nome: string;
   pontos: number;
   formacao: IFormacao;
-  jogadores: IPlayer[]
+  jogadores: IJogador[]
 }
 
 export interface IAlterarTimeFormData {

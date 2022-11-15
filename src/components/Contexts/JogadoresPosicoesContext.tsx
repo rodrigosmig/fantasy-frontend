@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { useTime } from "../../hooks/useTime";
-import { IJogadoresPosicoesContextData, IPlayer, IQuantityPositions } from "../../types/jogador";
+import { IJogadoresPosicoesContextData, IJogador, IQuantidadePosicoes } from "../../types/jogador";
 import { posicoesMap } from "../../utils/helpers";
 
 const JogadoresPosicoesContext = createContext({} as IJogadoresPosicoesContextData);
@@ -8,11 +8,11 @@ const JogadoresPosicoesContext = createContext({} as IJogadoresPosicoesContextDa
 export const JogadoresPosicoesProvider = ({ children }: JogadoresPosicoesProviderProps) => {
   const { data: time } = useTime();
 
-  const [jogadoresDefesa, setjogadoresDefesa] = useState<IPlayer[]>([]);
-  const [jogadoresMeio, setJogadoresMeio] = useState<IPlayer[]>([]);
-  const [jogadoresAtaque, setJogadoresAtaque] = useState<IPlayer[]>([]);
-  const [jogadorGoleiro, setJogadorGoleiro] = useState<IPlayer[]>([]);
-  const [quantidadePosicoes, setQuantidadePosicoes] = useState({} as IQuantityPositions);
+  const [jogadoresDefesa, setjogadoresDefesa] = useState<IJogador[]>([]);
+  const [jogadoresMeio, setJogadoresMeio] = useState<IJogador[]>([]);
+  const [jogadoresAtaque, setJogadoresAtaque] = useState<IJogador[]>([]);
+  const [jogadorGoleiro, setJogadorGoleiro] = useState<IJogador[]>([]);
+  const [quantidadePosicoes, setQuantidadePosicoes] = useState({} as IQuantidadePosicoes);
 
   useEffect(() => {
     if (time) {

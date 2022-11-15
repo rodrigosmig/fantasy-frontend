@@ -11,4 +11,5 @@ export interface IPositionForm {
 export interface IPositionContextData {
   posicoesForm: IPositionForm[],
 	posicoes: IPosition[];
+  isLoadingPosicoes: boolean;
 }

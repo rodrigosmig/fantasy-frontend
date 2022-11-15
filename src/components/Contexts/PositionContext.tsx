@@ -11,10 +11,15 @@ export const PositionProvider = ({ children }: PositionProviderProps) => {
 
   const [posicoes, setPosicoes] = useState<IPosition[]>([]);
   const [posicoesForm, setPosicoesForm] = useState<IPositionForm[]>([]);
+  const [isLoadingPosicoes, setIsLoadingPosicoes] = useState(true);
 
   useEffect(() => {
     const getPositions = async () => {
       const response = await positionService.getPositions();
+      const todasPosicoes = [{
+        value: 0,
+        label: "Selecione"
+      }]
       const novasPosicoesForm = response.data.map(posicao => {
         return {
           value: posicao.id,
@@ -23,7 +28,12 @@ export const PositionProvider = ({ children }: PositionProviderProps) => {
       });
 
       setPosicoes(response.data)
-      setPosicoesForm(novasPosicoesForm)
+      setPosicoesForm([
+        ...todasPosicoes,
+        ...novasPosicoesForm
+      ]);
+
+      setIsLoadingPosicoes(false);
     }
 
     const { token } = tokenService.get(null);
@@ -34,18 +44,19 @@ export const PositionProvider = ({ children }: PositionProviderProps) => {
   }, [user]);
 
   return (
-    <PositionContext.Provider value={{ posicoes, posicoesForm }}>
+    <PositionContext.Provider value={{ posicoes, posicoesForm, isLoadingPosicoes }}>
       { children }
     </PositionContext.Provider>
   )  
 }
 
 export const usePosicao = () => {
-  const { posicoes, posicoesForm } = useContext(PositionContext);
+  const { posicoes, posicoesForm, isLoadingPosicoes } = useContext(PositionContext);
   
   return {
 		posicoes,
-    posicoesForm
+    posicoesForm,
+    isLoadingPosicoes
   }
 }
 
