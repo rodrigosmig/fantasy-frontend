@@ -1,7 +1,7 @@
 import { memo } from "react"
 import { Flex } from "@chakra-ui/react"
 import { useTime } from "../../hooks/useTime";
-import { CampoSkeleton } from "../Skeleton/CampoSkeleton";
+import { CampoSkeleton } from "../../components/Skeleton/CampoSkeleton";
 import { Formacao } from "../Formacao/Formacao";
 
 const CampoComponent = () => {

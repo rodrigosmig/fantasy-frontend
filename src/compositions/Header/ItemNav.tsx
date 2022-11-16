@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { memo } from "react"
-import { Link } from "../Link/Link";
+import { Link } from "../../components/Link/Link";
 
 const NavItemComponent = ({ href, label, onClick }: NavItemProps) => {
   const { asPath } = useRouter();

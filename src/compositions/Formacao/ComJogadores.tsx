@@ -1,10 +1,10 @@
 import { Flex } from "@chakra-ui/react"
-import { useJogadoresPosicao } from "../Contexts/JogadoresPosicoesContext";
+import { useJogadoresPosicao } from "../../components/Contexts/JogadoresPosicoesContext";
 import { Camisas } from "./Camisas"
 
 
 export const ComJogadores = () => {
-  const { quantidadePosicoes, defesa, meio, ataque, goleiro } = useJogadoresPosicao();
+  const { defesa, meio, ataque, goleiro } = useJogadoresPosicao();
 
   return (
     <>

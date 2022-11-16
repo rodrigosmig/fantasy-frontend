@@ -8,24 +8,32 @@ import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { useSession } from "../components/Contexts/AuthContext";
 import { usePosicao } from "../components/Contexts/PositionContext";
-import { JogadoresItemTable } from "../components/JogadoresItemTable/JogadoresItemTable";
-import { Layout } from "../components/Layout/Layout";
+import { JogadoresItem } from "../compositions/JogadoresItem/JogadoresItem";
+import { Layout } from "../compositions/Layout/Layout";
 import { Loading } from "../components/Loading/Loading";
-import { SearchPlayer } from "../components/SearchPlayer/SearchPlayer";
+import { SearchPlayer } from "../compositions/SearchPlayer/SearchPlayer";
 import { Select } from "../components/Select/Select";
 import { JogadoresSkeleton } from "../components/Skeleton/JogadoresSkeleton";
 import { Table } from "../components/Table/Table";
 import { useTime } from "../hooks/useTime";
 import { paisService } from "../services/apiService/paisService";
 import { IPais, IPaisForm } from "../types/pais";
+import { useJogadores } from "../hooks/useJogadores";
+import { Pagination } from "../compositions/Pagination/Pagination";
 
 const Transfer: NextPage = () => {
   const { user } = useSession();
   const { posicoesForm, isLoadingPosicoes } = usePosicao();
   const { isLoading: isLoadingTime } = useTime();
-
   const [paises, setPaises] = useState<IPaisForm[]>([])
   const [isLoadingPaises, setIsLoadingPaises] = useState(true);
+  const [paisJogador, setPaisJogador] = useState("");
+  const [posicaoJogador, setPosicaoJogador] = useState("");
+  const [nomeJogador, setNomeJogador] = useState("");
+
+
+  const { data: jogadores, isLoading: isLoadingJogadores } = useJogadores(paisJogador, posicaoJogador, nomeJogador);
+  console.log(jogadores)
 
   const theadData = [
     "Info",
@@ -62,7 +70,11 @@ const Transfer: NextPage = () => {
 
   useEffect(() => {
     getPaises()
-  }, [user])
+  }, [user]);
+
+  const handleChangePage = (page: number) => {
+  
+  }
 
   return (
     <Layout>
@@ -112,11 +124,22 @@ const Transfer: NextPage = () => {
                   mt={4}
                 >
                   <Tbody textAlign={"center"}>
-                    <JogadoresItemTable />
+                    { !isLoadingJogadores && (
+                      jogadores?.content.map(jogador => <JogadoresItem jogador={jogador}/>)
+                    )}
                   </Tbody>
                 </Table>
               </>
             )}
+
+            <Pagination 
+              from={0}
+              to={10}
+              lastPage={3}
+              totalRegisters={24}
+              currentPage={1}
+              onPageChange={handleChangePage}
+            />
             
           </Box>
         </Flex>

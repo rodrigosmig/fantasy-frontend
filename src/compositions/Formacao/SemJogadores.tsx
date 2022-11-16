@@ -1,7 +1,6 @@
-import { Flex } from "@chakra-ui/react"
-import { useTime } from "../../hooks/useTime";
-import { useJogadoresPosicao } from "../Contexts/JogadoresPosicoesContext";
-import { Camisas } from "./Camisas"
+import { Flex } from "@chakra-ui/react";
+import { useJogadoresPosicao } from "../../components/Contexts/JogadoresPosicoesContext";
+import { Camisas } from "./Camisas";
 
 
 export const SemJogadores = () => {

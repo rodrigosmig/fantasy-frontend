@@ -1,6 +1,6 @@
 import { NextPage } from "next";
-import { Layout } from "../components/Layout/Layout";
-import { DadosTime } from "../components/DadosTime/DadosTime";
+import { Layout } from "../compositions/Layout/Layout";
+import { DadosTime } from "../compositions/DadosTime/DadosTime";
 import { SubmitButton } from "../components/Button/SubmitButton";
 import { Flex, useDisclosure } from "@chakra-ui/react";
 import { AlterarTimeModal } from "../components/Modal/AlterarTimeModal";

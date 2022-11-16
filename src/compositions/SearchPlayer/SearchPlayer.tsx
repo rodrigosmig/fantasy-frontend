@@ -1,5 +1,5 @@
 import { Button, Flex, Icon } from "@chakra-ui/react";
-import { Input } from "../Input/Input";
+import { Input } from "../../components/Input/Input";
 import { BsSearch } from 'react-icons/bs';
 
 export const SearchPlayer = () => {

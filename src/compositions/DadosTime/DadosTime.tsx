@@ -3,7 +3,7 @@ import {
 	Flex, 
 } from "@chakra-ui/react";
 import { useTime } from "../../hooks/useTime";
-import { DadosTimeSkeleton } from "../Skeleton/DadosTimeSkeleton";
+import { DadosTimeSkeleton } from "../../components/Skeleton/DadosTimeSkeleton";
 import { ItemFormacao } from "./ItemFormacao";
 import { ItemNomeTime } from "./ItemNomeTime";
 import { ItemPontos } from "./ItemPontos";

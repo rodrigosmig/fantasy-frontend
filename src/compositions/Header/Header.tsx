@@ -1,7 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react"
 import { memo } from "react"
-import { useSession } from "../Contexts/AuthContext";
-import { Link } from "../Link/Link";
+import { useSession } from "../../components/Contexts/AuthContext";
+import { Link } from "../../components/Link/Link";
 import { NavItem } from "./ItemNav";
 
 const HeaderComponent = () => {

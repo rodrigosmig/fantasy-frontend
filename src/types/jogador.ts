@@ -23,3 +23,11 @@ export interface IJogadoresPosicoesContextData {
   goleiro: IJogador[];
   quantidadePosicoes: IQuantidadePosicoes;
 }
+
+export interface IRespostaBuscaJogador {
+  content: IJogador[];
+  totalPages: number;
+  totalElements: number;
+  size: number;
+  number: number;
+}
