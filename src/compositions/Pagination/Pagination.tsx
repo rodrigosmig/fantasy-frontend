@@ -64,7 +64,7 @@ const PaginationComponent = ({
             _hover={{
               bg: bgHover
             }}
-            onClick={() => onPageChange(currentPage - 1)}
+            onClick={() => onPageChange(currentPage - 2)}
             isDisabled={currentPage === 1}
           >
             { '<' }
@@ -108,7 +108,7 @@ const PaginationComponent = ({
             _hover={{
               bg: bgHover
             }}
-            onClick={() => onPageChange(currentPage + 1)}
+            onClick={() => onPageChange(currentPage)}
             isDisabled={currentPage === lastPage}
           >
             { '>' }

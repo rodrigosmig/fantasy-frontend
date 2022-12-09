@@ -5,5 +5,10 @@ import { setupApiClient } from "../api";
 const apiClient = setupApiClient(null);
 
 export const jogadorService = {
-  get: (): Promise<AxiosResponse<IRespostaBuscaJogador>> => apiClient.get("/jogadores"),
+  get: (country: number, position: number, name: string, page: number): Promise<AxiosResponse<IRespostaBuscaJogador>> => {
+    const pais = country ? country : "";
+    const posicao = position ? position : "";
+
+    return apiClient.get(`/jogadores?nome=${name}&pais=${pais}&posicao=${posicao}&page=${page}`);
+  }
 };

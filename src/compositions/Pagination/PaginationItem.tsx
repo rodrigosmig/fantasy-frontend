@@ -35,7 +35,7 @@ export function PaginationItem({ number, isCurrent = false, onPageChange }: Prop
       _hover={{
         bg: bgHover
       }}
-      onClick={() => onPageChange(number)}
+      onClick={() => onPageChange(number - 1)}
 
     >
       { number }
