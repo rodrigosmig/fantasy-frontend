@@ -9,7 +9,7 @@ export const ChangeTeamModal = ({ isOpen, onClose }: CreateCategoryModalProps) =
         isOpen={isOpen}
         onClose={onClose}
       >
-        <AlterarTimeForm onClose={onClose} />
+        {/* <AlterarTimeForm onClose={onClose} /> */}
     </Modal>
   )
 }

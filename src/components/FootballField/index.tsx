@@ -1,11 +1,10 @@
 import { memo } from "react"
 import { Flex } from "@chakra-ui/react"
-import { useTeam } from "../../hooks/useTime";
 import { FootballFieldSkeleton } from "elements/Skeleton/FootballFieldSkeleton";
 import { Formation } from "../Formacao/Formation";
 
 const FootballFieldComponent = () => {
-  const { isLoading } = useTeam();
+  const isLoading = false;
 
   if (isLoading) {
     return <FootballFieldSkeleton />

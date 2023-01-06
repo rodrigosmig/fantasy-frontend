@@ -4,11 +4,10 @@ import { TeamData } from "components/TeamData";
 import { NextPage } from "next";
 
 import { ChangeTeamModal } from "../components/Modal/ChangeTeamModal";
-import { useTeam } from "hooks/useTime";
 import { Layout } from "compositions/Layout";
 
 const Index: NextPage = () => {
-  const { isLoading } = useTeam();
+  const isLoading = false;
   const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (

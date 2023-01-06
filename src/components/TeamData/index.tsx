@@ -3,13 +3,21 @@ import {
   Flex
 } from "@chakra-ui/react";
 import { TeamDataSkeleton } from "elements/Skeleton/TeamDataSkeleton";
-import { useTeam } from "hooks/useTime";
 import { FormationItem } from "./FormationItem";
 import { TeamNameItem } from "./TeamNameItem";
 import { TeamPointsItem } from "./TeamPointsItem";
 
 export const TeamData = () => {
-  const { data: time, isLoading } = useTeam();
+  const team = {
+    nome: 'Teste',
+    jogadores: [],
+    formacao: {
+      nome: '4-4-2',
+    },
+    pontos: 0
+  }
+
+  const isLoading = false;
 
   return (
     <Flex
@@ -25,16 +33,16 @@ export const TeamData = () => {
             width={["90%"]}
             textAlign="center"
           >
-          <TeamNameItem nomeTime={time ? time.nome : ""} fontSize={["xx-large"]} />
+          <TeamNameItem nomeTime={team ? team.nome : ""} fontSize={["xx-large"]} />
           </Box>
 
           <Box
             w={["90%"]}
             mb={[5]}
           >
-            <FormationItem label="Formação:" formacao={time ? time.formacao.nome : ""} />
-            <TeamPointsItem label="Pontos:" pontos={time ? time.pontos : 0} />
-            <TeamPointsItem label="Participação em Ligas:" pontos={time ? time.pontos : 0} />
+            <FormationItem label="Formação:" formacao={team ? team.formacao.nome : ""} />
+            <TeamPointsItem label="Pontos:" pontos={team ? team.pontos : 0} />
+            <TeamPointsItem label="Participação em Ligas:" pontos={team ? team.pontos : 0} />
           </Box>
         </>
       )}

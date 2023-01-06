@@ -1,9 +1,4 @@
 import { Flex } from "@chakra-ui/react";
-import { useTeam } from "../../hooks/useTime";
-import { posicoesMap } from "../../utils/helpers";
-import { useJogadoresPosicao } from "../Contexts/JogadoresPosicoesContext";
-import { usePosicao } from "../Contexts/PositionContext";
-import { ComJogadores } from "./ComJogadores";
 import { F343 } from "./F343";
 import { F442 } from "./F422";
 import { F433 } from "./F433";
