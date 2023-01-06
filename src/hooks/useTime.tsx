@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { useSession } from "../components/Contexts/AuthContext";
+import { useSession } from "../store/context/AuthContext";
 import { teamService } from "../services/apiService/teamService";
 
 const getTeam = async () => {
@@ -8,7 +8,7 @@ const getTeam = async () => {
   return response.data
 }
 
-export const useTime = () => {
+export const useTeam = () => {
   const { user } = useSession()
 
   return useQuery(['time', user?.id], () => getTeam(), {

@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { useSession } from "../components/Contexts/AuthContext";
+import { useSession } from "../store/context/AuthContext";
 import { formationService } from "../services/apiService/formationService";
 import { teamService } from "../services/apiService/teamService";
 

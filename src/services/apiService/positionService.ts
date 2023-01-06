@@ -1,6 +1,6 @@
-import { IPosition } from './../../types/posicao';
+import { IPosition } from '../../types/position';
 import { AxiosResponse } from "axios";
-import { IFormacao } from "../../types/formacao";
+import { Formation } from "../../types/formation";
 import { setupApiClient } from "../api";
 
 const apiClient = setupApiClient(null);

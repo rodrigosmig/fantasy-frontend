@@ -1,5 +1,5 @@
 import { Flex } from "@chakra-ui/react"
-import { useTime } from "../../hooks/useTime";
+import { useTeam } from "../../hooks/useTime";
 import { useJogadoresPosicao } from "../Contexts/JogadoresPosicoesContext";
 import { Camisas } from "./Camisas"
 

@@ -3,10 +3,9 @@ import NProgress from 'nprogress';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import type { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react';
-import { AuthProvider } from '../components/Contexts/AuthContext';
-import { theme } from '../styles/theme';
-import { PositionProvider } from '../components/Contexts/PositionContext';
-import { JogadoresPosicoesProvider } from '../components/Contexts/JogadoresPosicoesContext';
+import { AuthProvider } from 'store/context/AuthContext';
+import { theme } from 'styles/theme';
+import { PositionProvider } from 'store/context/PositionContext';
 
 function MyApp({ Component, pageProps }: AppProps) {
   Router.events.on('routeChangeStart', () => NProgress.start())
@@ -19,12 +18,12 @@ function MyApp({ Component, pageProps }: AppProps) {
     <AuthProvider>
       <QueryClientProvider client={queryClient}>
         <PositionProvider>
-          <JogadoresPosicoesProvider>
+          {/* <JogadoresPosicoesProvider> */}
             <ChakraProvider theme={theme}>            
               <Component {...pageProps} />
             </ChakraProvider>
 
-          </JogadoresPosicoesProvider>
+          {/* </JogadoresPosicoesProvider> */}
         </PositionProvider>
       </QueryClientProvider>
     </AuthProvider>

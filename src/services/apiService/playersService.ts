@@ -1,9 +1,9 @@
 import { AxiosResponse } from "axios";
-import { IPlayer } from "../../types/jogador";
+import { Player } from "../../types/player";
 import { setupApiClient } from "../api";
 
 const apiClient = setupApiClient(null);
 
 export const playersService = {
-  get: (): Promise<AxiosResponse<IPlayer[]>> => apiClient.get("/jogadores"),
+  get: (): Promise<AxiosResponse<Player[]>> => apiClient.get("/jogadores"),
 };

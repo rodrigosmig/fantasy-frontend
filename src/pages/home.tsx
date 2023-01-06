@@ -1,29 +1,30 @@
-import { NextPage } from "next";
-import { Layout } from "../components/Layout/Layout";
-import { DadosTime } from "../components/DadosTime/DadosTime";
-import { SubmitButton } from "../components/Button/SubmitButton";
 import { Flex, useDisclosure } from "@chakra-ui/react";
-import { AlterarTimeModal } from "../components/Modal/AlterarTimeModal";
-import { useTime } from "../hooks/useTime";
+import { Button } from "elements/Button";
+import { TeamData } from "components/TeamData";
+import { NextPage } from "next";
+
+import { ChangeTeamModal } from "../components/Modal/ChangeTeamModal";
+import { useTeam } from "hooks/useTime";
+import { Layout } from "compositions/Layout";
 
 const Index: NextPage = () => {
-  const { isLoading } = useTime();
+  const { isLoading } = useTeam();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
       <>
-        <AlterarTimeModal
+        <ChangeTeamModal
           isOpen={isOpen} 
           onClose={onClose}
         />
 
         <Layout>
-          <DadosTime />
+          <TeamData />
           
           <Flex
             justifyContent={"center"}
           >
-            { !isLoading && <SubmitButton onClick={onOpen} label="Alterar" /> }
+            { !isLoading && <Button onClick={onOpen} label="Alterar" /> }
           </Flex>
         </Layout>
       

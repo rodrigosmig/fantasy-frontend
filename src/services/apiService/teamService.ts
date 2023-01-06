@@ -1,10 +1,10 @@
 import { AxiosResponse } from "axios";
-import { IAlterarTimeFormData, ITime } from "../../types/time";
+import { TeamFormData, Team } from "../../types/team";
 import { setupApiClient } from "../api";
 
 const apiClient = setupApiClient(null);
 
 export const teamService = {
-  getTeam: (): Promise<AxiosResponse<ITime>> => apiClient.get("/times/meutime"),
-  changeTeam: (data: IAlterarTimeFormData): Promise<AxiosResponse<ITime>> => apiClient.put("/times/meutime", data),
+  getTeam: (): Promise<AxiosResponse<Team>> => apiClient.get("/times/meutime"),
+  changeTeam: (data: TeamFormData): Promise<AxiosResponse<Team>> => apiClient.put("/times/meutime", data),
 };
