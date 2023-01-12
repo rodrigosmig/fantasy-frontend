@@ -5,7 +5,7 @@ import { F433 } from "./F433";
 import { SemJogadores } from "./SemJogadores";
 
 
-export const Formation = () => {
+export const pontoFormation = () => {
   /* const { data: time } = useTeam(); */
 
   

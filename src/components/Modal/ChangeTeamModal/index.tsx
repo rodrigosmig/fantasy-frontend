@@ -1,4 +1,4 @@
-import { AlterarTimeForm } from "compositions/Forms/AlterarTimeForm";
+import { ChangeTeamForm } from "compositions/Forms/ChangeTeamForm";
 import { Modal } from "..";
 
 
@@ -9,7 +9,7 @@ export const ChangeTeamModal = ({ isOpen, onClose }: CreateCategoryModalProps) =
         isOpen={isOpen}
         onClose={onClose}
       >
-        {/* <AlterarTimeForm onClose={onClose} /> */}
+        <ChangeTeamForm onClose={onClose} />
     </Modal>
   )
 }

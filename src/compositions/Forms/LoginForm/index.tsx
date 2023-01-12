@@ -4,20 +4,24 @@ import {
 	useColorModeValue
 } from "@chakra-ui/react";
 import { yupResolver } from '@hookform/resolvers/yup';
+import { unwrapResult } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 import { Button } from "elements/Button";
 import { Input } from "elements/Input";
 import { Link } from "elements/Link";
+import { useDispatch } from "hooks/useDispatch";
+import Router from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSession } from "store/context/AuthContext";
+import { signIn } from "store/thunks/authThunk";
 import { Login, LoginError, LoginErrorFields } from "types/auth";
 import { notify } from "utils/helpers";
 import { loginValidation } from "validations/auth";
 
 export const LoginForm = () => {
-	const { signIn } = useSession();
-  const [isSubimited, setIsSubimited] = useState(false);
+	const dispatch = useDispatch();
+  
+	const [isSubimited, setIsSubimited] = useState(false);
 
   const { register, handleSubmit, setError, formState } = useForm<Login>({
     resolver: yupResolver(loginValidation)
@@ -26,11 +30,15 @@ export const LoginForm = () => {
   const { errors } = formState;
 
 	const onSubmit = handleSubmit(async values => {
-    try {
-      await signIn(values);
-      setIsSubimited(true);
-    } catch (ex) {
-      const err = ex as AxiosError
+		try {
+			await dispatch(signIn(values))
+				.unwrap();
+
+			setIsSubimited(true);
+
+			Router.push('/home')
+		} catch (ex) {
+			const err = ex as AxiosError
 
       if (err.response?.status === 401) {
         const error = err.response.data as LoginError;
@@ -45,9 +53,8 @@ export const LoginForm = () => {
         }
         return;
       }
-			console.error(err)
       return notify("Ocorreu um erro no servidor.", 'error');
-    }    
+		}
   })
 
 	return (
@@ -79,8 +86,15 @@ export const LoginForm = () => {
 			</Stack>
 
 			<Button
-				mt={[6]}
+				type="submit"
 				label="Entrar"
+				mt={[6]}
+				bg="pink.500"
+				_hover={{ bg: "pink.600" }}
+				_active={{
+					bg: "pink.400",
+					transform: "scale(0.98)",
+				}}
 				isLoading={formState.isSubmitting || isSubimited}
 				isDisabled={formState.isSubmitting || isSubimited}
 			/>

@@ -3,21 +3,13 @@ import {
   Flex
 } from "@chakra-ui/react";
 import { TeamDataSkeleton } from "elements/Skeleton/TeamDataSkeleton";
+import { useSelector } from "hooks/useSelector";
 import { FormationItem } from "./FormationItem";
 import { TeamNameItem } from "./TeamNameItem";
 import { TeamPointsItem } from "./TeamPointsItem";
 
 export const TeamData = () => {
-  const team = {
-    nome: 'Teste',
-    jogadores: [],
-    formacao: {
-      nome: '4-4-2',
-    },
-    pontos: 0
-  }
-
-  const isLoading = false;
+  const { isLoading, team } = useSelector(({team}) => team);
 
   return (
     <Flex

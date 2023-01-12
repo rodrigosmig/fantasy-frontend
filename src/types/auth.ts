@@ -1,5 +1,4 @@
-import { GetServerSidePropsContext } from "next";
-import { Team } from "./team";
+import { NextPageContext } from "next";
 
 export interface User {
   id: number;
@@ -35,6 +34,18 @@ export interface AuthContextData {
   isAuthenticated: boolean;
 }
 
+export interface AuthType {
+  isLoading: boolean;
+  token: string;
+  user: User;
+  isAuthenticated: boolean;
+  isError: boolean,
+  error: {
+    statusCode: number,
+    message: string
+  }
+}
+
 export interface IRegister extends AuthFormData {
   nome: string;
   nomeTime: string;
@@ -46,7 +57,7 @@ export type RegisterErrorFields = {
   field: "nome" | "email" | "senha" | "confirmacaoSenha" | "nomeTime";
 }[]
 
-export type ITokenContext = GetServerSidePropsContext | null | undefined;
+export type ITokenContext = NextPageContext | null | undefined;
 
 export interface ITokenExpiredError {
   code: string

@@ -1,16 +1,30 @@
-import { 
-	Box, 
-	Grid, 
-	GridItem, 
-	useColorMode, 
-	useColorModeValue 
+import {
+	Box,
+	Grid,
+	GridItem, useColorModeValue
 } from "@chakra-ui/react";
 import { FootballField } from "components/FootballField";
 import { Header } from "components/Header";
-import { memo, ReactNode } from "react"
+import { useDispatch } from "hooks/useDispatch";
+import { useSelector } from "hooks/useSelector";
+import { memo, ReactNode, useEffect } from "react";
+import { tokenService } from "services/tokenService";
+import { updateData } from "store/thunks/authThunk";
 
 const LayoutComponent = ({ children }: TeamDataProps) => {
+	const { isAuthenticated } = useSelector(({auth}) => auth);
+	const dispatch = useDispatch();
+
 	const bgColor = useColorModeValue('gray.50', 'gray.900');
+
+	useEffect(() => {
+		const {token} = tokenService.get(null)
+		console.log("useEffect autenticado", isAuthenticated)
+		if(!isAuthenticated && tokenService.isValid(token)) {
+			console.log("entrou use effect")
+			dispatch(updateData())
+		}
+	}, [isAuthenticated])
 
 	return (
 		<Box 

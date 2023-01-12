@@ -1,6 +1,11 @@
 import { Formation } from "./formation";
 import { Player } from "./player";
 
+export interface TeamType {
+  isLoading: boolean,
+  team: Team,
+  players: Player[],
+}
 
 export interface Team {
   id: number;

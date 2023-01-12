@@ -16,13 +16,6 @@ export const Button = ({ label, ...rest }: Props) => {
   return (
     <ChakraButton
       size={size}
-      type="submit" 
-      bg="pink.500"
-      _hover={{ bg: "pink.600" }}
-      _active={{
-        bg: "pink.400",
-        transform: "scale(0.98)",
-      }}
       {...rest}
     >
       {label}

@@ -7,31 +7,31 @@ import { AxiosError } from "axios";
 import { Button } from "elements/Button";
 import { useForm } from "react-hook-form";
 import { Input } from "elements/Input";
-import { useFormacoes } from "../../../hooks/useFormacoes";
-import { useTeam } from "hooks/useTime";
-import { teamService } from "services/apiService/teamService";
 import { TeamErrorFields, TeamFormData } from "types/team";
 import { notify } from "utils/helpers";
 import { changeTeamValidation } from "validations/time";
 import { Loading } from "elements/Loading";
 import { Alert } from "components/Alert";
 import { Select } from "elements/Select";
+import { useSelector } from "hooks/useSelector";
+import { useDispatch } from "hooks/useDispatch";
+import { changeTeam } from "store/thunks/teamThunk";
 
-export const AlterarTimeForm = ({ onClose }: AlterarTimeFormProps) => {
-  const { isOpen: isOpenDialog, onOpen: onOpenDialog, onClose: onCloseDialog } = useDisclosure()
-
-  const { data, isLoading } = useFormacoes();
-  const { data: time, refetch: refetchTeam } = useTeam()
+export const ChangeTeamForm = ({ onClose }: AlterarTimeFormProps) => {
+  const { isOpen: isOpenDialog, onOpen: onOpenDialog, onClose: onCloseDialog } = useDisclosure();
+  const { isLoading, formacoes } = useSelector(({appData}) => appData);
+  const { team } = useSelector(({team}) => team);
+  const dispatch = useDispatch();
 
   const { register, handleSubmit, setError, formState } = useForm<TeamFormData>({
     defaultValues: {
-      nomeTime: time?.nome,
-      formacaoId: time?.formacao.id,
+      nomeTime: team?.nome,
+      formacaoId: team?.formacao.id,
     },
     resolver: yupResolver(changeTeamValidation)
   });
 
-  const formacoes = data?.map(formacao => {
+  const options = formacoes?.map(formacao => {
     return {
       value: formacao.id,
       label: formacao.nome
@@ -42,12 +42,11 @@ export const AlterarTimeForm = ({ onClose }: AlterarTimeFormProps) => {
 
   const onSubmit = handleSubmit(async values => {
     try {
-      await teamService.changeTeam(values);
+      await dispatch(changeTeam(values))
+				.unwrap();
 
       notify("Time alterado com sucesso");
-      refetchTeam();
       onClose();
-
     } catch (ex) {
       const err = ex as AxiosError
 
@@ -88,7 +87,7 @@ export const AlterarTimeForm = ({ onClose }: AlterarTimeFormProps) => {
           />
 
           <Select
-            options={formacoes ? formacoes : []}
+            options={options}
             inputName='formacao'
             label='Formação'
             error={errors.formacaoId}
@@ -109,7 +108,14 @@ export const AlterarTimeForm = ({ onClose }: AlterarTimeFormProps) => {
           />
 
           <Button
+            type="submit"
             label="Salvar"
+            bg="pink.500"
+            _hover={{ bg: "pink.600" }}
+            _active={{
+              bg: "pink.400",
+              transform: "scale(0.98)",
+            }}
             isLoading={formState.isSubmitting}
           />
         </Flex>
