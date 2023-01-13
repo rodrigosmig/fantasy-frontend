@@ -2,9 +2,26 @@ import { Formation } from "./formation";
 import { Player } from "./player";
 
 export interface TeamType {
-  isLoading: boolean,
-  team: Team,
-  players: Player[],
+  isLoading: boolean;
+  team: Team;
+  numberByPosition: {
+    defence: number;
+    midfield: number;
+    attack: number;
+  };
+  players: {
+    goalkeeper: Player,
+    defenders: Player[],
+    midfielder: Player[],
+    attacker: Player[],
+  };
+}
+
+interface Players {
+  goalkeeper: Player,
+  defenders: Player[],
+  midfielder: Player[],
+  attacker: Player[],
 }
 
 export interface Team {

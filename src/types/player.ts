@@ -1,18 +1,10 @@
 import { Country } from "./country";
-import { IPosition, PositionsData } from "./position";
+import { Position } from "./position";
 
 export interface Player {
   id: number;
   nome: string;
-  posicao: IPosition;
-  pontos: string;
+  posicao: Position;
+  pontos: number;
   pais: Country
-}
-
-export interface PlayesPositionsContextData {
-  defesa: Player[];
-  meio: Player[];
-  ataque: Player[];
-  goleiro: Player[];
-  quantidadePosicoes: PositionsData;
 }

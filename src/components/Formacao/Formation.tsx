@@ -1,36 +1,9 @@
 import { Flex } from "@chakra-ui/react";
-import { F343 } from "./F343";
-import { F442 } from "./F422";
-import { F433 } from "./F433";
-import { SemJogadores } from "./SemJogadores";
+import { useSelector } from "hooks/useSelector";
+import { Camisas } from "./Camisas";
 
-
-export const pontoFormation = () => {
-  /* const { data: time } = useTeam(); */
-
-  
-  const team = {
-    jogadores: [],
-    formacao: {
-    nome: '4-4-2'
-  }}
-  
-  const isEmpty = () => {
-    return team ? team.jogadores.length === 0 : true;
-  }
-
-  const getFormation = () => {
-    switch (team?.formacao.nome) {
-      case "4-4-2":
-        return <F442 />
-      case "4-3-3":
-        return <F433 />
-      case "3-4-3":
-        return <F343 />
-      default:
-        return <F442 />
-    }
-  }
+export const Formation = () => {
+  const {players} = useSelector(({ team }) => team)
 
   return (
     <Flex
@@ -39,7 +12,34 @@ export const pontoFormation = () => {
       flexDir="column"
       justifyContent={"space-between"}
     >
-      campo
+      <Flex
+        justifyContent={"space-evenly"}
+      >
+        {players.attacker.map((player) => (
+          <Camisas player={player} key={player.id} />
+        ))}
+      </Flex>
+      <Flex
+        justifyContent={"space-evenly"}
+      >
+        {players.midfielder.map((player) => (
+          <Camisas player={player} key={player.id} />
+        ))}
+      </Flex>
+      <Flex
+        justifyContent={"space-evenly"}
+      >
+        {players.defenders.map((player) => (
+          <Camisas player={player} key={player.id} />
+        ))}
+      </Flex>
+      <Flex
+        mb={8}
+        justifyContent={"space-evenly"}
+      >
+        <Camisas player={players.goalkeeper} key={players.goalkeeper.id} />
+
+      </Flex>
     </Flex>
   )
 }

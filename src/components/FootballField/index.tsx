@@ -1,8 +1,9 @@
 import { memo } from "react"
 import { Flex } from "@chakra-ui/react"
 import { FootballFieldSkeleton } from "elements/Skeleton/FootballFieldSkeleton";
-import { Formation } from "../Formacao/Formation";
+
 import { useSelector } from "hooks/useSelector";
+import { Formation } from "components/Formacao/Formation";
 
 const FootballFieldComponent = () => {
   const { isLoading } = useSelector(({team}) => team);

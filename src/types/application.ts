@@ -1,3 +1,7 @@
+import { Country } from "./country";
+import { Formation } from "./formation";
+import { Position } from "./position";
+
 export interface ApplicationData {
   isLoading: boolean,
   paises: Country[];
@@ -6,19 +10,3 @@ export interface ApplicationData {
 }
 
 export interface ApplicationDataResponse extends Omit<ApplicationData, 'isLoading'> {}
-
-export interface Country {
-  id: number;
-  nome: string;
-  sigla: string
-}
-
-export interface Formation {
-	id: number;
-	nome: string;
-}
-
-export interface Position {
-  id: number;
-  nome: string;
-}
