@@ -15,29 +15,29 @@ export const Formation = () => {
       <Flex
         justifyContent={"space-evenly"}
       >
-        {players.attacker.map((player) => (
-          <Camisas player={player} key={player.id} />
+        {players.attacker.map((player, index) => (
+          <Camisas player={player} key={player.id !== 0 ? player.id : index} />
         ))}
       </Flex>
       <Flex
         justifyContent={"space-evenly"}
       >
-        {players.midfielder.map((player) => (
-          <Camisas player={player} key={player.id} />
+        {players.midfielder.map((player, index) => (
+          <Camisas player={player} key={player.id !== 0 ? player.id : index} />
         ))}
       </Flex>
       <Flex
         justifyContent={"space-evenly"}
       >
-        {players.defenders.map((player) => (
-          <Camisas player={player} key={player.id} />
+        {players.defenders.map((player, index) => (
+          <Camisas player={player} key={player.id !== 0 ? player.id : index} />
         ))}
       </Flex>
       <Flex
         mb={8}
         justifyContent={"space-evenly"}
       >
-        <Camisas player={players.goalkeeper} key={players.goalkeeper.id} />
+        <Camisas player={players.goalkeeper} />
 
       </Flex>
     </Flex>

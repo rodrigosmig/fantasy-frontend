@@ -8,3 +8,11 @@ export interface Player {
   pontos: number;
   pais: Country
 }
+
+export interface PlayersResponse {
+  content: Player[];
+  totalPages: number;
+  totalElements: number;
+  size: number;
+  number: number;
+}
