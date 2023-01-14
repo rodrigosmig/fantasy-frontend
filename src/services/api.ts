@@ -1,8 +1,8 @@
-import { GetServerSidePropsContext } from 'next';
+import { NextPageContext } from 'next';
 import axios from 'axios';
 import { tokenService } from './tokenService';
 
-type ContextType = GetServerSidePropsContext | null | undefined
+export type ContextType = NextPageContext | null | undefined
 
 export const setupApiClient = (context: ContextType) => {
   const api = axios.create({

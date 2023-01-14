@@ -1,18 +1,18 @@
-import { IUser } from './../../types/auth';
+import { User } from './../../types/auth';
 import { AxiosResponse } from "axios";
-import { ILogin, ILoginResponse, IRegister } from "../../types/auth";
+import { Login, LoginResponse, IRegister } from "../../types/auth";
 import { setupApiClient } from "../api";
 
 const apiClient = setupApiClient(undefined);
 
 export const authService = {
-  register: (data: IRegister): Promise<AxiosResponse<IUser>> => apiClient.post(
+  register: (data: IRegister): Promise<AxiosResponse<User>> => apiClient.post(
     "/users/register",
     data,
     ),
-  signIn: (credentials: ILogin): Promise<AxiosResponse<ILoginResponse>> => apiClient.post(
+  signIn: (credentials: Login): Promise<AxiosResponse<LoginResponse>> => apiClient.post(
     "/auth/login",
     credentials   
   ),
-  me: (): Promise<AxiosResponse<IUser>> => apiClient.get("/users/me"), 
+  me: (): Promise<AxiosResponse<User>> => apiClient.get("/users/me"), 
 };

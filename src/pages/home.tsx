@@ -1,34 +1,43 @@
-import { NextPage } from "next";
-import { Layout } from "../components/Layout/Layout";
-import { DadosTime } from "../components/DadosTime/DadosTime";
-import { SubmitButton } from "../components/Button/SubmitButton";
 import { Flex, useDisclosure } from "@chakra-ui/react";
-import { AlterarTimeModal } from "../components/Modal/AlterarTimeModal";
-import { useTime } from "../hooks/useTime";
+import { TeamData } from "components/TeamData";
+import { Button } from "elements/Button";
+import { NextPage } from "next";
+
+import { Layout } from "compositions/Layout";
+import { useSelector } from "hooks/useSelector";
+import { ChangeTeamModal } from "../components/Modal/ChangeTeamModal";
 
 const Index: NextPage = () => {
-  const { isLoading } = useTime();
+  const { isLoading: IsLoadingTeam, team } = useSelector(({team}) => team);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-    return (
-      <>
-        <AlterarTimeModal
-          isOpen={isOpen} 
-          onClose={onClose}
-        />
+  return (
+    <>
+      <ChangeTeamModal
+        isOpen={isOpen} 
+        onClose={onClose}
+      />
 
-        <Layout>
-          <DadosTime />
-          
-          <Flex
-            justifyContent={"center"}
-          >
-            { !isLoading && <SubmitButton onClick={onOpen} label="Alterar" /> }
-          </Flex>
-        </Layout>
-      
-      </>
-    )
-  };
+      <Layout>
+        <TeamData />
+        
+        <Flex
+          justifyContent={"center"}
+        >
+          { !IsLoadingTeam && (
+            <Button
+              colorScheme="pink"
+              size={"sm"} 
+              onClick={onOpen} 
+              label="Alterar"
+            />
+          )}
+        </Flex>
+      </Layout>
+    
+    </>
+  )
+};
   
-  export default Index;
+export default Index;

@@ -1,9 +1,11 @@
+import { Layout } from "compositions/Layout";
 import { NextPage } from "next";
-import { Layout } from "../components/Layout/Layout";
 
 const Ranking: NextPage = () => {
   return (
-    <Layout></Layout>
+    <Layout>
+      <h1>Ranking</h1>
+    </Layout>
   )
 };
 
