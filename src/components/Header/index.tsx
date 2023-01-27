@@ -3,7 +3,6 @@ import { NavItem } from "elements/NavItem";
 import { useDispatch } from "hooks/useDispatch";
 import Router from "next/router";
 import { memo, useCallback } from "react"
-import { useSession } from "store/context/AuthContext";
 import { logout } from "store/slices/authSlice";
 
 const HeaderComponent = () => {

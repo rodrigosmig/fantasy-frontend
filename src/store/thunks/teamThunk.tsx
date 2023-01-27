@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { RootState } from "hooks/useSelector";
 import { teamService } from "services/apiService/teamService";
-import { TeamFormData } from "types/team";
+import { Team, TeamFormData } from "types/team";
 import { fillPlayersByPosition, getNumberByPosition, getPlayersByPosition } from "utils/helpers";
 
 export const getTeam = createAsyncThunk(
@@ -44,5 +45,25 @@ export const changeTeam = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
+  }
+)
+
+export const savePlayers = createAsyncThunk<void, void, { state: RootState }>(
+  'team/savePlayers',
+  async (_, thunkAPI) => {
+    const { team } = thunkAPI.getState().team
+    const ids = team.jogadores.map(player => player.id)
+
+    const jogadoresIds = {
+      jogadoresIds: ids
+    }
+
+    try {
+      await teamService.savePlayers(jogadoresIds)
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+
+    thunkAPI.dispatch(getTeam());
   }
 )

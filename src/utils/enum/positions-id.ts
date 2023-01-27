@@ -1,4 +1,4 @@
-export enum PositionsID {
+export enum POSITIONS_ID {
   GOALKEEPER = 1,
   DEFENDER = 2,
   MIDFIELDER = 3,
