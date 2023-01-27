@@ -7,11 +7,12 @@ import { FootballField } from "components/FootballField";
 import { Header } from "components/Header";
 import { useDispatch } from "hooks/useDispatch";
 import { useSelector } from "hooks/useSelector";
-import { memo, ReactNode, useEffect } from "react";
+import { memo, PropsWithChildren, useEffect } from "react";
 import { tokenService } from "services/tokenService";
 import { updateData } from "store/thunks/authThunk";
+import { Player } from "types/player";
 
-const LayoutComponent = ({ children }: TeamDataProps) => {
+const LayoutComponent = ({ children, onClick }: LayoutProps) => {
 	const { isAuthenticated } = useSelector(({auth}) => auth);
 	const dispatch = useDispatch();
 
@@ -19,12 +20,11 @@ const LayoutComponent = ({ children }: TeamDataProps) => {
 
 	useEffect(() => {
 		const {token} = tokenService.get(null)
-		console.log("useEffect autenticado", isAuthenticated)
+
 		if(!isAuthenticated && tokenService.isValid(token)) {
-			console.log("entrou use effect")
 			dispatch(updateData())
 		}
-	}, [isAuthenticated])
+	}, [dispatch, isAuthenticated])
 
 	return (
 		<Box 
@@ -36,8 +36,8 @@ const LayoutComponent = ({ children }: TeamDataProps) => {
 				templateAreas={`"header header"
 												"main aside"
 												"footer footer"`}
-				gridTemplateRows={"10vh 80vh 10vh"}
-				gridTemplateColumns={'2fr 1fr'}
+				gridTemplateRows={"10vh 80vh 20vh"}
+				gridTemplateColumns={'3fr 2fr'}
 				gap='1'
 			>
 				<GridItem 
@@ -51,23 +51,19 @@ const LayoutComponent = ({ children }: TeamDataProps) => {
 				</GridItem>
 
 				<GridItem area={'main'}>
-					<FootballField />
+					<FootballField onClick={onClick} />
 				</GridItem>
 
 				<GridItem area={'aside'}>
 					{ children }
-				</GridItem>
-
-				<GridItem area={'footer'}>
-					footer
 				</GridItem>
 			</Grid>
 		</Box>	
 	)
 }
 
-interface TeamDataProps {
-	children: ReactNode;
+interface LayoutProps extends PropsWithChildren {
+	onClick?: (player: Player) => void
 }
 
 export const Layout = memo(LayoutComponent);

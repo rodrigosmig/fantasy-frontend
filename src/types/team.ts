@@ -4,24 +4,29 @@ import { Player } from "./player";
 export interface TeamType {
   isLoading: boolean;
   team: Team;
+  hasChange: boolean;
   numberByPosition: {
-    defence: number;
-    midfield: number;
-    attack: number;
+    goalkeeper: number;
+    defenders: number;
+    midfielders: number;
+    attackers: number;
+  };
+  counterByPosition: {
+    goalkeeper: number;
+    defenders: number;
+    midfielders: number;
+    attackers: number;
   };
   players: {
-    goalkeeper: Player,
+    goalkeeper: Player[],
     defenders: Player[],
-    midfielder: Player[],
-    attacker: Player[],
+    midfielders: Player[],
+    attackers: Player[],
   };
 }
 
-interface Players {
-  goalkeeper: Player,
-  defenders: Player[],
-  midfielder: Player[],
-  attacker: Player[],
+export interface TeamPlayersData {
+  jogadoresIds: number[];
 }
 
 export interface Team {

@@ -5,10 +5,10 @@ import { NextPage } from "next";
 
 import { Layout } from "compositions/Layout";
 import { useSelector } from "hooks/useSelector";
-import { ChangeTeamModal } from "../components/Modal/ChangeTeamModal";
+import { ChangeTeamModal } from "../components/ChangeTeamModal";
 
 const Index: NextPage = () => {
-  const { isLoading: IsLoadingTeam, team } = useSelector(({team}) => team);
+  const { isLoading: IsLoadingTeam } = useSelector(({team}) => team);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 

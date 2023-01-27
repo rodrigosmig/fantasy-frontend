@@ -1,5 +1,5 @@
 import { ChangeTeamForm } from "compositions/Forms/ChangeTeamForm";
-import { Modal } from "..";
+import { Modal } from "../Modal";
 
 
 export const ChangeTeamModal = ({ isOpen, onClose }: CreateCategoryModalProps) => {

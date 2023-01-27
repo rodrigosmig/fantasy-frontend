@@ -11,8 +11,6 @@ export const getPlayers = async (country: number, position: number, name: string
 export const useJogadores = (country: number, position: number, name: string, page: number) => {
   const { user } = useSelector(({auth}) => auth);
 
-  console.log(666, name)
-
   return useQuery(['players', country, position, name, page, user?.id], () => getPlayers(country, position, name, page), {
     staleTime: 1000 * 60 * 30
   })
